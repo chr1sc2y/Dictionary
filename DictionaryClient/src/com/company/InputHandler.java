@@ -1,6 +1,10 @@
+//
+//  Author: Zhengyu Chen
+//  Student ID: 991678
+//
+
 package com.company;
 
-import java.io.File;
 import java.util.regex.Pattern;
 
 public class InputHandler {
@@ -8,9 +12,6 @@ public class InputHandler {
 
     public InputHandler(String[] args) {
         this.args = args;
-        System.out.println(args.length);
-        for (int i = 0; i < args.length; ++i)
-            System.out.println(args[i]);
     }
 
     public boolean ParameterHandler() {
@@ -48,16 +49,12 @@ public class InputHandler {
             System.out.println("> Please ensure each integer is between 0 and 255.");
             return false;
         }
-        System.out.println(addressString);
         return true;
     }
 
     private boolean AddressParse(String addressString) {
         String[] addressSplit = addressString.split("\\.");
-        System.out.println("String Split test!");
-        System.out.println(addressSplit.length);
         for (int i = 0; i < addressSplit.length; ++i) {
-            System.out.println(addressSplit[i]);
             int addressNumber = Integer.parseInt(addressSplit[i]);
             if (addressNumber < 0 || addressNumber > 255)
                 return false;

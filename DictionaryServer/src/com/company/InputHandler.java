@@ -1,3 +1,8 @@
+//
+//  Author: Zhengyu Chen
+//  Student ID: 991678
+//
+
 package com.company;
 
 import java.io.File;
@@ -14,9 +19,6 @@ public class InputHandler {
 //        String[] arg = {"98513","sadeg"};
 //        String[] arg = {"51481","/Users/zintrulcre/Course/Distributed System/Project/Project 1/Data/testarg.txt"};
 //        String[] arg = {"51481","/Users/zintrulcre/Course/Distributed System/Project/Project 1/Data/testarg.json"};
-        System.out.println(args.length);
-        for (int i = 0; i < args.length; ++i)
-            System.out.println(args[i]);
     }
 
     public boolean ParameterHandler() {
@@ -59,7 +61,6 @@ public class InputHandler {
 
     public boolean FileHandler(String fileString) {
         File file = new File(fileString);
-        System.out.println(fileString);
         if (!file.exists()) {
             System.out.println("> File Path is wrong.");
             System.out.println("> The file does not exist.");

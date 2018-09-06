@@ -1,26 +1,25 @@
-package com.company;
+//
+//  Author: Zhengyu Chen
+//  Student ID: 991678
+//
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
+package com.company;
 
 public class DictionaryClient {
 
     public static void main(String[] args) {
-//        InputHandler inputHandler = new InputHandler(args);
-//        boolean parameterHandler = inputHandler.ParameterHandler();
-//        if (!parameterHandler)
-//            return;
-//        String address = args[0];
-//        int port = Integer.parseInt(args[1]);
-//
-//        Client client = new Client(address, port);
-//        ClientGUI clientGUI = new ClientGUI(client);
+        InputHandler inputHandler = new InputHandler(args);
+        boolean parameterHandler = inputHandler.ParameterHandler();
+        if (!parameterHandler)
+            return;
+        String address = args[0];
+        int port = Integer.parseInt(args[1]);
 
-        Client client = new Client("127.0.0.1", 6666);
+        Client client = new Client(address, port);
+        int connect = client.clientConnect();
+        if (connect != 0)
+            return;
         ClientGUI clientGUI = new ClientGUI(client);
-
         Frame frame = new Frame(clientGUI, client);
     }
 }

@@ -1,7 +1,11 @@
+//
+//  Author: Zhengyu Chen
+//  Student ID: 991678
+//
+
 package com.company;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -10,9 +14,6 @@ import java.util.Arrays;
 public class ClientGUI{
     private JPanel panel1;
     public JTabbedPane tabbledPane;
-
-    //Introduction
-    private JPanel panelIntroduction;
 
     //Search
     private JPanel panelSearch;

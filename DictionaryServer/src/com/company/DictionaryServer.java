@@ -1,27 +1,25 @@
+//
+//  Author: Zhengyu Chen
+//  Student ID: 991678
+//
+
 package com.company;
 
 public class DictionaryServer {
 
     public static void main(String[] args) {
-//        InputHandler inputHandler = new InputHandler(args);
-//        boolean parameterHandler = inputHandler.ParameterHandler();
-//        if (!parameterHandler)
-//            return;
-//        int port = Integer.parseInt(args[0]);
-//        String dictionaryPath = args[1];
-//
-//        Dictionary dictionary = new Dictionary(dictionaryPath);
-//        System.out.println(dictionary.getSize());
-//        Server server = new Server(port, dictionary);
-//        dictionary.Operation();
+        InputHandler inputHandler = new InputHandler(args);
+        boolean parameterHandler = inputHandler.ParameterHandler();
+        if (!parameterHandler)
+            return;
+        int port = Integer.parseInt(args[0]);
+        String dictionaryPath = args[1];
 
         ServerGUI serverGUI = new ServerGUI();
         Frame frame = new Frame(serverGUI);
 
-        Dictionary dictionary = new Dictionary("/Users/zintrulcre/Course/Distributed System/Project/Project 1/Data/Dict.txt");
-        System.out.println(dictionary.getSize());
-        Server server = new Server(6666, dictionary, serverGUI);
-        //dictionary.Operation();
+        Dictionary dictionary = new Dictionary(dictionaryPath);
+        Server server = new Server(port, dictionary, serverGUI);
 
         serverGUI.setServer(server);
         serverGUI.AddActionListener();

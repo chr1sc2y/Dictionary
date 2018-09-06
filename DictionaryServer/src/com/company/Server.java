@@ -1,8 +1,10 @@
+//
+//  Author: Zhengyu Chen
+//  Student ID: 991678
+//
+
 package com.company;
 
-import org.w3c.dom.Text;
-
-import java.awt.*;
 import java.util.*;
 import java.io.*;
 import java.net.*;
@@ -17,6 +19,8 @@ public class Server {
     ServerHandler serverHandler;
     Thread serverThread;
     boolean serverStarted = false;
+
+    Map<Integer,Thread> threadList;
 
     public int getPort() {
         return port;
@@ -41,19 +45,22 @@ public class Server {
             return;
         }
         serverStarted = true;
+
+        threadList = new HashMap<>();
+
         serverHandler = new ServerHandler(this.port);
         serverThread = new Thread(serverHandler);
         serverThread.start();
     }
 
     public void ServerClose(boolean buttonClose) {
-        if (buttonClose)
+        if (buttonClose) {
             if (!serverStarted) {
                 Print("> Server has not started yet.");
                 Print("> Please start the server first.");
                 return;
             }
-        serverStarted = false;
+        }
         serverHandler.Close();
     }
 
@@ -77,6 +84,7 @@ public class Server {
                     Print("> Client " + socket.getPort() + " has connected!");
                     ClientHandler clientHandler = new ClientHandler(socket);
                     Thread clientThread = new Thread(clientHandler);
+                    threadList.put(socket.getPort(),clientThread);
                     clientThread.start();
                 }
             } catch (SocketException e) {
@@ -89,6 +97,16 @@ public class Server {
 
         public void Close() {
             try {
+                int size = threadList.size();
+                if(size > 0) {
+                    if(size > 1)
+                        Print("> " + size + " clients are still running!");
+                    else
+                        Print("> " + "1 clinet is still running!");
+                    Print("> Please close clients first!");
+                    return;
+                }
+                serverStarted = false;
                 serversocket.close();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -164,6 +182,7 @@ public class Server {
 
         public void Close() {
             try {
+                threadList.remove(socket.getPort());
                 objectInputStream.close();
                 objectOutputStream.close();
                 socket.close();

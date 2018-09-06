@@ -1,3 +1,8 @@
+//
+//  Author: Zhengyu Chen
+//  Student ID: 991678
+//
+
 package com.company;
 
 import javax.swing.*;
@@ -10,6 +15,7 @@ public class ServerGUI {
     private JButton buttonStart;
     private JTextArea textAreaInfo;
     private JButton buttonExit;
+    private JButton buttonClear;
 
     public JTextArea getTextAreaInfo() {
         return textAreaInfo;
@@ -33,6 +39,12 @@ public class ServerGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 server.ServerClose(true);
+            }
+        });
+        buttonClear.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                textAreaInfo.setText("");
             }
         });
     }

@@ -1,3 +1,8 @@
+//
+//  Author: Zhengyu Chen
+//  Student ID: 991678
+//
+
 package com.company;
 
 import java.io.*;
@@ -5,20 +10,36 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 public class Client {
+    private String address;
+    private int port;
+
     private Socket socket;
     private ObjectInputStream objectInputStream;
     private ObjectOutputStream objectOutputStream;
 
     public Client(String address, int port) {
+        this.address = address;
+        this.port = port;
+    }
+
+    public int clientConnect() {
         System.out.println("> Connecting...");
         try {
             socket = new Socket(address, port);
+        } catch (IOException e) {
+            System.out.println("> Connecting failed.");
+            System.out.println("> Please start the server first and check the port number.");
+            return 1;
+        }
+
+        try {
             objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
             objectInputStream = new ObjectInputStream(socket.getInputStream());
-            System.out.println("> Connect to server!");;
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            return 2;
         }
+        System.out.println("> Connect to server!");
+        return 0;
     }
 
     public ArrayList<String> Search(String stringSearch) {
@@ -40,7 +61,7 @@ public class Client {
         return null;
     }
 
-    public Boolean Insert(String stringInsert, ArrayList<String> meanings) {
+    public boolean Insert(String stringInsert, ArrayList<String> meanings) {
         try {
             Message message = new Message("Insert", stringInsert, meanings);
             objectOutputStream.writeObject(message);
@@ -59,7 +80,7 @@ public class Client {
         return false;
     }
 
-    public Boolean Delete(String stringDelete) {
+    public boolean Delete(String stringDelete) {
         try {
             Message message = new Message("Delete", stringDelete);
             objectOutputStream.writeObject(message);
