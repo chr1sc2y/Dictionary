@@ -15,7 +15,7 @@ Default port is 55555.
 ### Client
 
 ```
-$ java -jar DictionaryClient.jar
+$ java -jar DictionaryClient.jar -ip <ip address> -port <port number>
 ```
 
 ## Implementation
